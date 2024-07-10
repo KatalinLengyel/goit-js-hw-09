@@ -1,8 +1,8 @@
 import Notiflix from 'notiflix';
 
-const formEl = document.querySelector(".form");
+const form = document.querySelector(".form");
 
-formEl.addEventListener("submit", onSubmitForm);
+form.addEventListener("submit", onSubmitForm);
 
 function createPromise(position, delay) {
   return new Promise((resolve, reject) => {
@@ -19,9 +19,9 @@ function createPromise(position, delay) {
 
 function onSubmitForm(entry) {
   entry.preventDefault();
-  let delay = Number(formEl.delay.value);
+  let delay = Number(form.delay.value);
 
-  for (let i = 1; i <= formEl.amount.value; i++) {
+  for (let i = 1; i <= form.amount.value; i++) {
     createPromise(i, delay)
     .then(({ position, delay }) => {
       Notiflix.Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`);
@@ -29,6 +29,6 @@ function onSubmitForm(entry) {
     .catch(({ position, delay }) => {
       Notiflix.Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`);
     });
-  delay += Number(formEl.step.value);  
+  delay += Number(form.step.value);  
   };
 };
